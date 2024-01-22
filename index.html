@@ -1,0 +1,2616 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+.topnav {
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100%;
+  overflow-x: auto;
+  background: rgb(147, 140, 149);
+  white-space: nowrap;
+  border-radius: 0px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.topnav a {
+  display: inline-block;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 20px;
+  text-decoration: none;
+  font-size: 20px;
+  margin-right: 10px;
+}
+
+.topnav a:hover {
+  background-color: #87c245;
+  color: white;
+  transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+  border-radius: 5px;
+
+}
+.topnav a:not(:first-child) {
+  margin-right: 10px;
+}
+
+
+.button-container {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px 5px;
+  margin: 0 10px 10px 4px; /* Adjust margin for spacing between buttons */
+  background-color: #cfd9dc;
+  color: rgb(0, 0, 0);
+  text-align: center;
+  text-decoration: none;
+  font-size: 10px;
+  
+  border-radius: 5px;
+  min-width: 90px;
+}
+
+
+.button img {
+  padding-right: 10px;
+  height: 20px;
+  width: 20px;
+}
+
+.button:hover {
+  background-color: #04AA6D;
+}
+
+.name1 {
+  background-color: #ffffff;
+  color: rgb(0, 0, 0);
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  border-radius: 5px;
+}
+
+.buttonbox{
+    overflow: auto;
+}
+.buttonbox1{
+  overflow: auto;}
+
+  .buttonbox2{
+    overflow: auto;
+}
+.buttonbox3{
+  overflow: auto;}
+
+  .category-buttons-container {
+    overflow-x: auto;
+    white-space: nowrap;
+    padding: 10px;
+    background: #ffffff;
+  }
+
+  .category-buttons-container button {
+    padding: 10px 20px;
+    margin-right: 10px; /* Add some space between buttons */
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    background-color: #fff;
+    color: #333;
+    white-space: nowrap; /* Prevent line breaks */
+  }
+  .category-buttons-container button:hover {
+  background-color: #f0f0f0;
+}
+  .category-buttons-container button.active {
+    background-color: #b94ece;
+    color: #ffffff;
+    border: 2px solid #5b2ac5;
+    /* transition: border 0.1s ease-in-out; */
+
+
+  }
+
+  .category-buttons-container button {
+  margin-right: 15px;
+  /* transition: background-color 0.9s ease-in-out, color 0.9s ease-in-out; */
+
+}
+
+.container {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+#no-results-message {
+  text-align: center;
+  font-size: 18px;
+}
+
+
+
+    .shimmer {
+  position: relative;
+  overflow: hidden;
+}
+
+.shimmer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-300%);
+  }
+  100% {
+    transform: translateX(500%);
+  }
+}
+  
+</style>
+</head>
+
+<!-- 
+<div class="topnav" id="myTopnav">
+  <a href="#" onclick="showAll()">Show All</a>
+
+    <a href="#" onclick="showContainer('container')">Search Engines</a>
+  <a href="#" onclick="showContainer('container1')">Reels</a>
+  <a href="#" onclick="showContainer('container3')">About</a> 
+  <a href="#class1">search engine</a>
+  <a href="#contact">Reels</a>
+  <a href="#about">About</a>
+  <a href="#text1">Text 1</a>
+  <a href="#text2">Text 2</a>
+  <a href="#text3">Text 3</a>
+  <a href="#text4">Text 4</a>
+  <a href="#text5">Text 5</a>
+  <a href="https://www.google.com">Google</a>
+  <a href="https://www.facebook.com">Facebook</a>
+  <a href="https://www.instagram.com">Instagram</a>
+</div> -->
+
+
+<div class="category-buttons-container">
+  <button class="filter-button active" onclick="filterVideos('all')" data-category="all">Show All</button>
+  <button class="filter-button" onclick="filterVideos('DatingSites')" data-category="DatingSites">DatingSites</button>
+
+  <button class="filter-button" onclick="filterVideos('Banks')" data-category="Banks">Banks</button>
+  <button class="filter-button" onclick="filterVideos('Education')" data-category="Education">Education</button>
+  <button class="filter-button" onclick="filterVideos('Fashion')" data-category="Fashion">Fashion</button>
+  <button class="filter-button" onclick="filterVideos('Food')" data-category="Food">Food</button>
+  <button class="filter-button" onclick="filterVideos('Games')" data-category="Games">Games</button>
+  <button class="filter-button" onclick="filterVideos('Health')" data-category="Health">Health</button>
+  <button class="filter-button" onclick="filterVideos('Hotel')" data-category="Hotel">Hotel</button>
+  <button class="filter-button" onclick="filterVideos('Images')" data-category="Images">Images</button>
+  <button class="filter-button" onclick="filterVideos('Jobs')" data-category="Jobs">Jobs</button>
+  <button class="filter-button" onclick="filterVideos('Movies')" data-category="Movies">Movies</button>
+  <button class="filter-button" onclick="filterVideos('Musics')" data-category="Musics">Musics</button>
+  <button class="filter-button" onclick="filterVideos('Newsread')" data-category="Newsread">Newsread</button>
+  <button class="filter-button" onclick="filterVideos('Novel')" data-category="Novel">Novel</button>
+
+  <button class="filter-button" onclick="filterVideos('Parenting')" data-category="Parenting">Parenting</button>
+  <button class="filter-button" onclick="filterVideos('SearchEngines')" data-category="SearchEngines">SearchEngines</button>
+  <button class="filter-button" onclick="filterVideos('Shopping')" data-category="Shopping">Shopping</button>
+  <button class="filter-button" onclick="filterVideos('Socialmedia')" data-category="Socialmedia">Socialmedia</button>
+  <button class="filter-button" onclick="filterVideos('Sports')" data-category="Sports">Sports</button>
+  <button class="filter-button" onclick="filterVideos('Weddings')" data-category="Weddings">Weddings</button>
+  <button class="filter-button" onclick="filterVideos('Newsread')" data-category="Newsread">Newsread</button>
+
+
+
+
+</div> 
+
+
+<div class="container" data-category="DatingSites">
+
+  <div class="name1">
+<p>All Dating  WebSites</p></div>
+<div class="buttonbox1">
+  
+  <div class="button-container">
+    
+
+
+
+
+      <a href="https://www.tinder.com/">
+        <div class="button shimmer">
+          <img src="img/tinder.png" alt="ESPN Logo" height="30" width="30"> Tinder
+        </div>
+      </a>
+
+      <a href="https://www.bumble.com/">
+        <div class="button shimmer">
+          <img src="img/bumble.png" alt="ESPN Logo" height="30" width="30"> Bumble
+        </div>
+      </a>
+
+      <a href="https://www.okcupid.com/">
+        <div class="button shimmer">
+          <img src="img/okcupid.png" alt="ESPN Logo" height="30" width="30"> OkCupid
+        </div>
+      </a>
+
+      <a href="https://www.match.com/">
+        <div class="button shimmer">
+          <img src="img/match.png" alt="ESPN Logo" height="30" width="30"> Match
+        </div>
+      </a>
+
+      <a href="https://www.zoosk.com/">
+        <div class="button shimmer">
+          <img src="img/zoosk.png" alt="ESPN Logo" height="30" width="30"> Zoosk
+        </div>
+      </a>
+
+      <a href="https://www.eharmony.com/">
+        <div class="button shimmer">
+          <img src="img/eharmony.png" alt="ESPN Logo" height="30" width="30"> eHarmony
+        </div>
+      </a>
+
+      <a href="https://www.christianmingle.com/">
+        <div class="button shimmer">
+          <img src="img/christianmingle.png" alt="ESPN Logo" height="30" width="30"> Christian Mingle
+        </div>
+      </a>
+
+      <a href="https://www.jdate.com/">
+        <div class="button shimmer">
+          <img src="img/jdate.png" alt="ESPN Logo" height="30" width="30"> JDate
+        </div>
+      </a>
+
+      <a href="https://www.silversingles.com/">
+        <div class="button shimmer">
+          <img src="img/silversingles.png" alt="ESPN Logo" height="30" width="30"> Silver Singles
+        </div>
+      </a>
+
+
+      <a href="https://www.ourtime.com/">
+        <div class="button shimmer">
+          <img src="img/ourtime.png" alt="ESPN Logo" height="30" width="30"> Our Time
+        </div>
+      </a>
+
+
+ 
+  </div>
+</div>
+</div>
+
+
+<div class="container" data-category="Banks">
+  <div class="name1">
+<p>Banking WebSites</p></div>
+<div class="buttonbox1">
+  
+  <div class="button-container">
+
+    
+    <a href="https://www.onlinesbi.sbi/">
+      <div class="button shimmer">
+        <img src="img/sbi.png" alt="Image 1" height="30" width="30"> SBI Bank
+      </div>
+    </a>
+    <a href="https://karnatakabank.com/">
+      <div class="button shimmer">
+        <img src="img/karnatakabank.png" alt="Image 1" height="30" width="30"> Karnataka Bank
+      </div>
+    </a>
+    <a href="https://canarabank.com/#">
+      <div class="button shimmer">
+        <img src="img/canarabank.png" alt="Image 1" height="30" width="30"> Canara Bank
+      </div>
+    </a>
+  
+    <a href="https://www.icicibank.com/">
+      <div class="button shimmer">
+        <img src="img/icicibank.png" alt="Image 1" height="30" width="30"> ICICI Bank
+      </div>
+    </a>
+    <a href="https://www.hdfcbank.com/">
+      <div class="button shimmer">
+        <img src="img/hdfcbank.png" alt="Image 1" height="30" width="30"> HDFC Bank
+      </div>
+    </a>
+    <a href="https://www.netbanking.indianbank.in/">
+      <div class="button shimmer">
+        <img src="img/netbanking.png" alt="Image 1" height="30" width="30"> Indian Bank
+      </div>
+    </a>
+    <a href="https://www.kotak811.com/">
+      <div class="button shimmer">
+        <img src="img/kotak811.png" alt="Image 1" height="30" width="30"> Kotak Mahindra Bank
+      </div> 
+    </a>
+    <a href="https://www.axisbank.com/">
+      <div class="button shimmer">
+        <img src="img/axisbank.png" alt="Image 1" height="30" width="30"> Axis Bank
+      </div>
+    </a>
+    <a href="https://www.idbibank.in/index.asp">
+      <div class="button shimmer">
+        <img src="img/idbibank.png" alt="Image 1" height="30" width="30"> IDBI Bank
+      </div>
+    </a>
+  
+  
+  
+  
+    <a href="https://www.bankofbaroda.in/">
+      <div class="button shimmer">
+        <img src="img/bankofbaroda.png"Image 1" height="30" width="30"> Bank of Baroda
+      </div>
+    </a>
+  
+    <a href="https://www.indianbank.in/">
+      <div class="button shimmer">
+        <img src="img/indianbank.png" alt="Image 1" height="30" width="30"> Indian Bank
+      </div>
+    </a>
+  
+  
+ 
+  </div>
+</div>
+</div>
+
+
+
+<div class="container" data-category="Education">
+
+  <div class="name1">
+<p>Educational WebSites</p></div>
+<div class="buttonbox1">
+  <div class="button-container">
+
+    <a href="https://collegedunia.com/">
+      <div class="button shimmer">
+        <img src="img/collegedunia.png" alt="Image 1" height="30" width="30"> College Dunia
+      </div>
+    </a>
+    <a href="https://www.shiksha.com/">
+      <div class="button shimmer">
+        <img src="img/shiksha.png" alt="Image 1" height="30" width="30"> Shiksha
+      </div>
+    </a>
+    <a href="https://www.careers360.com/">
+      <div class="button shimmer">
+        <img src="img/careers360.png" alt="Image 1" height="30" width="30"> Careers360
+      </div>
+    </a>
+    <a href="https://www.embibe.com/">
+      <div class="button shimmer">
+        <img src="img/embibe.png" alt="Image 1" height="30" width="30"> Embibe
+      </div>
+    </a>
+   
+    <a href="https://www.careerindia.com/">
+      <div class="button shimmer">
+        <img src="img/careerindia.png" alt="Image 1" height="30" width="30">
+        Career India
+      </div>
+    </a>
+    <a href="https://www.careerlauncher.com/">
+      <div class="button shimmer">
+        <img src="img/careerlauncher.png" alt="Image 1" height="30" width="30">
+        Career Launcher
+      </div>
+    </a>
+    <a href="https://www.vedantu.com/">
+      <div class="button shimmer">
+        <img src="img/vedantu.png" alt="Image 1" height="30" width="30">
+        Vedantu
+      </div>
+    </a>
+    <a href="https://www.toppr.com/">
+      <div class="button shimmer">
+        <img src="img/toppr.png" alt="Image 1" height="30" width="30">
+        Toppr
+      </div>
+    </a>
+    <a href="https://www.unacademy.com/">
+      <div class="button shimmer">
+        <img src="img/unacademy.png" alt="Image 1" height="30" width="30">
+        Unacademy
+      </div>
+    </a>
+    <a href="https://www.khanacademy.org/">
+      <div class="button shimmer">
+        <img src="img/khanacademy.png" alt="Image 1" height="30" width="30">
+        Khan Academy
+      </div>
+    </a>
+    <a href="https://www.udemy.com/">
+      <div class="button shimmer">
+        <img src="img/udemy.png" alt="Image 1" height="30" width="30">
+        Udemy
+      </div>
+    </a>
+    <a href="https://www.coursera.org/">
+      <div class="button shimmer">
+        <img src="img/coursera.png" alt="Image 1" height="30" width="30"> Coursera
+      </div>
+    </a>
+    <a href="https://www.edx.org/">
+      <div class="button shimmer">
+        <img src="img/edx.png" alt="Image 1" height="30" width="30"> Edx
+      </div>
+    </a>
+    <a href="https://www.udacity.com/">
+      <div class="button shimmer">
+        <img src="img/udacity.png" alt="Image 1" height="30" width="30"> Udacity
+      </div>
+    </a>
+    <a href="https://www.simplilearn.com/">
+      <div class="button shimmer">
+        <img src="img/simplilearn.png" alt="Image 1" height="30" width="30">
+        Simplilearn
+      </div>
+    </a>
+    <a href="https://www.skillshare.com/">
+      <div class="button shimmer">
+        <img src="img/skillshare.png" alt="Image 1" height="30" width="30">
+        Skillshare
+      </div>
+    </a>
+    <a href="https://www.futurelearn.com/">
+      <div class="button shimmer">
+        <img src="img/futurelearn.png" alt="Image 1" height="30" width="30">
+        Future Learn
+      </div>
+    </a>
+    <a href="https://www.lynda.com/">
+      <div class="button shimmer">
+        <img src="img/lynda.png" alt="Image 1" height="30" width="30"> Lynda
+      </div>
+    </a>
+    <a href="https://www.codecademy.com/learn">
+      <div class="button shimmer">
+        <img src="img/codecademy.png" alt="Image 1" height="30" width="30"> Code Academy
+      </div>
+    </a>
+  
+    <a href="https://www.codingninjas.com/">
+      <div class="button shimmer">
+        <img src="img/codingninjas.png" alt="Image 1" height="30" width="30">
+        Coding Ninjas
+      </div>
+    </a>
+    <a href="https://www.geeksforgeeks.org/">
+      <div class="button shimmer">
+        <img src="img/geeksforgeeks.png" alt="Image 1" height="30" width="30"> Geeks for Geeks
+      </div>
+    </a>
+    <a href="https://www.hackerrank.com/">
+      <div class="button shimmer">
+        <img src="img/hackerrank.png" alt="Image 1" height="30" width="30"> Hacker Rank
+      </div>
+    </a>
+  
+  
+  </div>
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+<div class="container" data-category="Fashion">
+  <div class="name1">
+<p>Fashion WebSites</p></div>
+<div class="buttonbox1">
+    <div class="button-container">
+
+      <a href="https://www.panaprium.com/">
+        <div class="button shimmer">
+          <img src="img/panaprium.png" alt="Image 1" height="30" width="30"> Panaprium
+        </div>
+      </a>
+      <a href="https://www.fashionbeans.com/">
+        <div class="button shimmer">
+          <img src="img/fashionbeans.png" alt="Image 1" height="30" width="30"> Fashionbeans
+        </div>
+      </a>
+      
+      <a href="https://threadcurve.com/">
+        <div class="button shimmer">
+          <img src="img/threadcurve.png" alt="Image 1" height="30" width="30"> Threadcurve
+        </div>
+      </a>
+      <a href="https://www.fashionlady.in/">
+        <div class="button shimmer">
+          <img src="img/fashionlady.png" alt="Image 1" height="30" width="30">
+          Fashionlady
+        </div>
+      </a>
+      
+      
+     
+  </div>
+</div>
+</div>
+
+
+
+<div class="container" data-category="Food">
+  <div class="name1">
+<p>Food WebSites</p></div>
+<div class="buttonbox1">
+
+  <div class="button-container">
+
+    <a href="https://www.zomato.com/">
+      <div class="button shimmer">
+        <img src="img/zomato.png" alt="Image 1" height="30" width="30"> Zomato
+      </div>
+    </a>
+    <a href="https://www.swiggy.com/">
+      <div class="button shimmer">
+        <img src="img/swiggy.png" alt="Image 1" height="30" width="30"> Swiggy
+      </div>
+    </a>
+    <a href="https://www.ubereats.com/in">
+      <div class="button shimmer">
+        <img src="img/ubereats.png" alt="Image 1" height="30" width="30"> Uber Eats
+      </div>
+    </a>
+    <a href="https://www.dominos.co.in/">
+      <div class="button shimmer">
+        <img src="img/dominos.png" alt="Image 1" height="30" width="30">
+        Dominos
+      </div>
+    </a>
+    <a href="https://www.mcdelivery.co.in/">
+      <div class="button shimmer">
+        <img src="img/mcdelivery.png" alt="Image 1" height="30" width="30">
+        McDonald's
+      </div>
+    </a>
+    <a href="https://www.pizzahut.co.in/">
+      <div class="button shimmer">
+        <img src="img/pizzahut.png" alt="Image 1" height="30" width="30">
+        Pizza Hut
+      </div>
+    </a>
+    <a href="https://www.kfc.co.in/">
+      <div class="button shimmer">
+        <img src="img/kfc.png" alt="Image 1" height="30" width="30">
+        KFC
+      </div>
+    </a>
+    <a href="https://www.dineout.co.in/">
+      <div class="button shimmer">
+        <img src="img/dineout.png" alt="Image 1" height="30" width="30">
+        Dineout
+      </div>
+    </a>
+    <a href="https://www.foodpanda.in/">
+      <div class="button shimmer">
+        <img src="img/foodpanda.png" alt="Image 1" height="30" width="30">
+        Foodpanda
+      </div>
+    </a>
+    <a href="https://www.bigbasket.com/">
+      <div class="button shimmer">
+        <img src="img/bigbasket.png" alt="Image 1" height="30" width="30">
+        Big Basket
+      </div>
+  
+    </a>
+    <a href="https://www.grofers.com/">
+      <div class="button shimmer">
+        <img src="img/grofers.png" alt="Image 1" height="30" width="30">
+        Grofers
+      </div>
+    </a>
+    <a href="https://www.amazon.in/pantry-online-grocery-shopping-store/b?ie=UTF8&node=9574332031">
+      <div class="button shimmer">
+        <img src="img/amazon.png" alt="Image 1" height="30" width="30">
+        Amazon Pantry
+      </div>
+    </a>
+    <a href="https://www.flipkart.com/grocery-supermart-store?otracker=nmenu_Grocery%20Supermart">
+      <div class="button shimmer">
+        <img src="img/flipkart.png" alt="Image 1" height="30" width="30">
+        Flipkart Supermart
+      </div>
+    </a>
+    <a href="https://www.naturesbasket.co.in/Online-grocery-shopping/Natures-Basket/s/9">
+      <div class="button shimmer">
+        <img src="img/naturesbasket.png" alt="Image 1" height="30" width="30">
+        Nature's Basket
+      </div>
+    </a>
+    <a href="https://www.jiomart.com/">
+      <div class="button shimmer">
+        <img src="img/jiomart.png" alt="Image 1" height="30" width="30"> Jio Mart
+      </div>
+    </a>
+    <a href="https://www.dmart.in/">
+      <div class="button shimmer">
+        <img src="img/dmart.png" alt="Image 1" height="30" width="30"> Dmart
+      </div>
+    </a>
+    <a href="https://www.bigbazaar.com/">
+      <div class="button shimmer">
+        <img src="img/bigbazaar.png" alt="Image 1" height="30" width="30"> Big Bazaar
+      </div>
+    </a>
+    <a href="https://www.spencers.in/">
+      <div class="button shimmer">
+        <img src="img/spencers.png" alt="Image 1" height="30" width="30"> Spencers
+      </div>
+    </a>
+    <a href="https://www.groceryfactory.in/">
+      <div class="button shimmer">
+        <img src="img/groceryfactory.png" alt="Image 1" height="30" width="30"> Grocery Factory
+      </div>
+    </a>
+    
+    
+  </div>
+</div>
+</div>
+
+
+
+
+
+
+
+<div class="container" data-category="Games">
+  <div class="name1">
+<p>Gaming WebSites</p></div>
+<div class="buttonbox1">
+  
+  <div class="button-container">
+    <a href="https://www.gamezop.com/">
+      <div class="button shimmer">
+        <img src="img/gamezop.png" alt="Image 1" height="30" width="30"> Gamezop
+      </div>
+    </a>
+    <a href="https://www.miniclip.com/games/en/">
+      <div class="button shimmer">
+        <img src="img/miniclip.png" alt="Image 1" height="30" width="30"> Miniclip
+      </div>
+    </a>
+  
+    <a href="https://www.agame.com/games">
+      <div class="button shimmer">
+        <img src="img/agame.png" alt="Image 1" height="30" width="30"> Agame
+      </div>
+    </a>
+    <a href="https://www.pogo.com/">
+      <div class="button shimmer">
+        <img src="img/pogo.png" alt="Image 1" height="30" width="30"> Pogo
+      </div>
+    </a>
+    <a href="https://www.kongregate.com/games">
+      <div class="button shimmer">
+        <img src="img/kongregate.png" alt="Image 1" height="30" width="30"> Kongregate
+      </div>
+    </a>
+    <a href="https://www.crazygames.com/">
+      <div class="button shimmer">
+        <img src="img/crazygames.png" alt="Image 1" height="30" width="30">
+        Crazy Games
+      </div>
+    </a>
+    <a href="https://www.arkadium.com/free-online-games/">
+      <div class="button shimmer">
+        <img src="img/arkadium1.png" alt="Image 1" height="30" width="30">
+        Arkadium
+      </div>
+    </a>
+    <a href="https://www.247games.com/">
+      <div class="button shimmer">
+        <img src="img/247games.png" alt="Image 1" height="30" width="30">
+        247 Games
+      </div>
+    </a>
+    <a href="https://www.gamesgames.com/">
+      <div class="button shimmer">
+        <img src="img/gamesgames.png" alt="Image 1" height="30" width="30">
+        Games Games
+      </div>
+    </a>
+    <a href="https://www.freeonlinegames.com/">
+      <div class="button shimmer">
+        <img src="img/freeonlinegames.png" alt="Image 1" height="30" width="30">
+        Free Online Games
+      </div>
+    </a>
+    <a href="https://www.addictinggames.com/">
+      <div class="button shimmer">
+        <img src="img/addictinggames.png" alt="Image 1" height="30" width="30">
+        Addicting Games
+      </div>
+    </a>
+  
+  
+    <a href="https://www.atmegame.com/">
+      <div class="button shimmer">
+        <img src="img/atmegame.png" alt="Image 1" height="30" width="30"> Atmegame
+      </div>
+    </a>
+    <a href="https://poki.com/">
+      <div class="button shimmer">
+        <img src="img/poki.png" alt="Image 1" height="30" width="30"> Poki
+      </div>
+    </a>
+ 
+  </div>
+</div>
+</div>
+
+<div class="container" data-category="Health">
+
+  <div class="name1">
+<p>Health WebSites</p></div>
+<div class="buttonbox1">
+  
+  <div class="button-container">
+    <a href="https://kannada.boldsky.com/">
+    <div class="button shimmer">
+      <img src="img/boldskykannada.png" alt="Image 1" height="30" width="30"> Boldsky
+    </div>
+  </a>
+  <a href="https://www.webmd.com/">
+    <div class="button shimmer">
+      <img src="img/webmd.png" alt="Image 1" height="30" width="30"> Webmd
+    </div>
+  </a>
+  <a href="https://www.healthline.com/">
+    <div class="button shimmer">
+      <img src="img/healthline.png" alt="Image 1" height="30" width="30"> Healthline
+    </div>
+  </a>
+  <a href="https://www.medicinenet.com/">
+    <div class="button shimmer">
+      <img src="img/medicinenet.png" alt="Image 1" height="30" width="30"> Medicinenet
+    </div>
+  </a>
+  <a href="https://www.mayoclinic.org/">
+    <div class="button shimmer">
+      <img src="img/mayoclinic.png" alt="Image 1" height="30" width="30">
+      Mayo Clinic
+    </div>
+  </a>
+  <a href="https://www.medicalnewstoday.com/">
+    <div class="button shimmer">
+      <img src="img/medicalnewstoday.png" alt="Image 1" height="30" width="30">
+      Medical News Today
+    </div>
+  </a>
+  <a href="https://www.drugs.com/">
+    <div class="button shimmer">
+      <img src="img/drugs.png" alt="Image 1" height="30" width="30">
+      Drugs.com
+    </div>
+  </a>
+  <a href="https://www.rxlist.com/">
+    <div class="button shimmer">
+      <img src="img/rxlist.png" alt="Image 1" height="30" width="30">
+      RxList
+    </div>
+  </a>
+  <a href="https://www.cdc.gov/">
+    <div class="button shimmer">
+      <img src="img/cdc.png" alt="Image 1" height="30" width="30">
+      CDC
+    </div>
+  </a>
+  <a href="https://www.health.com/">
+    <div class="button shimmer">
+      <img src="img/health.png" alt="Image 1" height="30" width="30">
+      Health
+    </div>
+
+  </a>
+  <a href="https://www.healthgrades.com/">
+    <div class="button shimmer">
+      <img src="img/healthgrades.png" alt="Image 1" height="30" width="30">
+      Healthgrades
+    </div>
+  </a>
+  <a href="https://www.everydayhealth.com/">
+    <div class="button shimmer">
+      <img src="img/everydayhealth.png" alt="Image 1" height="30" width="30">
+      Everyday Health
+    </div>
+  </a>
+  <a href="https://www.health.harvard.edu/">
+    <div class="button shimmer">
+      <img src="img/health.harvard.png" alt="Image 1" height="30" width="30">
+     Harvard Health
+    </div>
+  </a>
+  <a href="https://www.pinkvilla.com/">
+    <div class="button shimmer">
+      <img src="img/pinkvilla.png" alt="Image 1" height="30" width="30"> Pinkvilla
+    </div>
+  </a>
+  
+  
+
+  
+ 
+  </div>
+</div>
+</div>
+
+<div class="container" data-category="Hotel">
+
+  <div class="name1">
+<p>Hotel Websites</p></div>
+<div class="buttonbox1">
+  
+  <div class="button-container">
+    <a href="https://www.agoda.com/">
+    <div class="button shimmer">
+      <img src="img/agoda.png" alt="Image 1" height="30" width="30"> Agoda
+    </div>
+  </a>
+  <a href="https://www.booking.com/">
+    <div class="button shimmer">
+      <img src="img/booking.png" alt="Image 1" height="30" width="30"> Booking.com
+    </div>
+  </a>
+  <a href="https://www.trivago.in/">
+    <div class="button shimmer">
+      <img src="img/trivago.png" alt="Image 1" height="30" width="30">
+      Trivago
+    </div>
+  </a>
+  <a href="https://www.makemytrip.com/">
+    <div class="button shimmer">
+      <img src="img/makemytrip.png" alt="Image 1" height="30" width="30">
+      MakeMyTrip
+    </div>
+  </a>
+  <a href="https://www.yatra.com/">
+    <div class="button shimmer">
+      <img src="img/yatra.png" alt="Image 1" height="30" width="30">
+      Yatra
+    </div>
+  </a>
+  <a href="https://www.cleartrip.com/">
+    <div class="button shimmer">
+      <img src="img/cleartrip.png" alt="Image 1" height="30" width="30">
+      Cleartrip
+    </div>
+  </a>
+  <a href="https://www.goibibo.com/">
+    <div class="button shimmer">
+      <img src="img/goibibo.png" alt="Image 1" height="30" width="30">
+      Goibibo
+    </div>
+  </a>
+  <a href="https://www.oyorooms.com/">
+    <div class="button shimmer">
+      <img src="img/oyorooms.png" alt="Image 1" height="30" width="30">
+      Oyo
+    </div>
+  </a>
+  <a href="https://www.happyeasygo.com/">
+    <div class="button shimmer">
+      <img src="img/happyeasygo.png" alt="Image 1" height="30" width="30">
+      HappyEasyGo
+    </div>
+  </a>
+  <a href="https://www.ixigo.com/">
+    <div class="button shimmer">
+      <img src="img/ixigo.png" alt="Image 1" height="30" width="30">
+      Ixigo
+    </div>
+  </a>
+  <a href="https://www.tripadvisor.in/">
+    <div class="button shimmer">
+      <img src="img/tripadvisor.png" alt="Image 1" height="30" width="30">
+     Tripadvisor
+    </div>
+  </a>
+  <a href="https://www.hotel.com/">
+    <div class="button shimmer">
+      <img src="img/hotel.png" alt="Image 1" height="30" width="30"> Hotels.com
+    </div>
+  </a>
+  <a href="https://www.hotelscombined.com/">
+    <div class="button shimmer">
+      <img src="img/hotelscombined.png" alt="Image 1" height="30" width="30"> HotelsCombined
+    </div>
+  </a>
+
+
+
+
+  </div>
+</div>
+</div>
+
+
+<div class="container" data-category="Images">
+
+  <div class="name1">
+<p>Images WebSites</p></div>
+<div class="buttonbox1">
+  
+  <div class="button-container">
+    <a href="https://images.google.com/">
+    <div class="button shimmer">
+      <img src="img/googleimage.png" alt="Image 1" height="30" width="30"> Google Images
+    </div>
+  </a>
+  
+  <a href="https://www.pinterest.com/">
+    <div class="button shimmer">
+      <img src="img/printest.png" alt="Image 1" height="30" width="30"> Pinterest
+    </div>
+  </a>
+  <a href="https://www.gettyimages.in/">
+    <div class="button shimmer">
+      <img src="img/gettyimages.png" alt="Image 1" height="30" width="30">
+      Getty Images
+    </div>
+  </a>
+  <a href="https://www.shutterstock.com/">
+    <div class="button shimmer">
+      <img src="img/shutterstock.png" alt="Image 1" height="30" width="30">
+      Shutterstock
+    </div>
+  </a>
+  <a href="https://www.flickr.com/">
+    <div class="button shimmer">
+      <img src="img/flickr.png" alt="Image 1" height="30" width="30">
+      Flickr
+    </div>
+  </a>
+  <a href="https://www.istockphoto.com/in">
+    <div class="button shimmer">
+      <img src="img/istockphoto.png" alt="Image 1" height="30" width="30">
+      iStock
+    </div>
+  </a>
+  <a href="https://www.123rf.com/">
+    <div class="button shimmer">
+      <img src="img/123rf.png" alt="Image 1" height="30" width="30">
+      123RF
+    </div>
+  </a>
+  <a href="https://www.alamy.com/">
+    <div class="button shimmer">
+      <img src="img/alamy.png" alt="Image 1" height="30" width="30">
+      Alamy
+    </div>
+  </a>
+  <a href="https://www.dreamstime.com/">
+    <div class="button shimmer">
+      <img src="img/dreamstime.png" alt="Image 1" height="30" width="30">
+      Dreamstime
+    </div>
+  </a>
+  <a href="https://www.stock.adobe.com/in/">
+    <div class="button shimmer">
+      <img src="img/stock.adobe.png" alt="Image 1" height="30" width="30">
+      Adobe Stock
+    </div>
+  </a>
+  <a href="https://www.canstockphoto.com/">
+    <div class="button shimmer">
+      <img src="img/canstockphoto.png" alt="Image 1" height="30" width="30">
+     Can Stock Photo
+    </div>
+  </a>
+  <a href="https://www.bigstockphoto.com/">
+    <div class="button shimmer">
+      <img src="img/bigstockphoto.png" alt="Image 1" height="30" width="30"> Bigstock
+    </div>
+  </a>
+  <a href="https://www.veer.com/">
+    <div class="button shimmer">
+      <img src="img/veer.png" alt="Image 1" height="30" width="30"> Veer
+    </div>
+  </a>
+  <a href="https://www.stocksy.com/">
+    <div class="button shimmer">
+      <img src="img/stocksy.png" alt="Image 1" height="30" width="30"> Stocksy
+    </div>
+  </a>
+ 
+  
+  <a href="https://www.freeimages.com/">
+    <div class="button shimmer">
+      <img src="img/freeimages.png" alt="Image 1" height="30" width="30">
+     Freeimages
+    </div>
+  </a>
+  <a href="https://www.lovethispic.com/">
+    <div class="button shimmer">
+      <img src="img/lovethispic.png" alt="Image 1" height="30" width="30">
+      LoveThisPic
+    </div>
+  </a>
+  <a href="https://www.wallpapercave.com/">
+    <div class="button shimmer">
+      <img src="img/wallpapercave.png" alt="Image 1" height="30" width="30">
+      WallpaperCave
+    </div>
+  </a>
+  <a href="https://www.wallpaperflare.com/">
+    <div class="button shimmer">
+      <img src="img/wallpaperflare.png" alt="Image 1" height="30" width="30"> WallpaperFlare
+    </div>
+  </a>
+  <a href="https://www.wallpaperaccess.com/">
+    <div class="button shimmer">
+      <img src="img/wallpaperaccess.png" alt="Image 1" height="30" width="30"> WallpaperAccess
+    </div>
+  </a>
+  <a href="https://www.wallpaperplay.com/">
+    <div class="button shimmer">
+      <img src="img/wallpaperplay.png" alt="Image 1" height="30" width="30"> WallpaperPlay
+    </div>
+  </a>
+ 
+
+
+ 
+  </div>
+</div>
+</div>
+
+<div class="container" data-category="Jobs">
+
+  <div class="name1">
+<p>Job WebSites</p></div>
+<div class="buttonbox1">
+  
+  <div class="button-container">
+    <a href="https://indeed.com/">
+    <div class="button shimmer">
+      <img src="img/indeed.png" alt="Image 1" height="30" width="30"> Indeed
+    </div>
+  </a>
+  <a href="https://www.naukri.com/">
+    <div class="button shimmer">
+      <img src="img/naukri.png" alt="Image 1" height="30" width="30"> Naukri
+    </div>
+  </a>
+  <a href="https://www.monsterindia.com/">
+    <div class="button shimmer">
+      <img src="img/monsterindia.png" alt="Image 1" height="30" width="30"> Monster
+    </div>
+  </a>
+  <a href="https://www.timesjobs.com/">
+    <div class="button shimmer">
+      <img src="img/timesjobs.png" alt="Image 1" height="30" width="30"> Timesjobs
+    </div>
+  </a>
+  <a href="https://www.shine.com/">
+    <div class="button shimmer">
+      <img src="img/shine.png" alt="Image 1" height="30" width="30">
+      Shine
+    </div>
+  </a>
+  <a href="https://www.freshersworld.com/">
+    <div class="button shimmer">
+      <img src="img/freshersworld.png" alt="Image 1" height="30" width="30">
+      Freshersworld
+    </div>
+  </a>
+  <a href="https://www.linkedin.com/jobs/">
+    <div class="button shimmer">
+      <img src="img/linkedin.png" alt="Image 1" height="30" width="30">
+      Linkedin
+    </div>
+  </a>
+
+  <a href="https://www.glassdoor.co.in/index.htm">
+    <div class="button shimmer">
+      <img src="img/glassdoor.png" alt="Image 1" height="30" width="30">
+      Glassdoor
+    </div>
+  </a>
+  <a href="https://www.careerbuilder.com/">
+    <div class="button shimmer">
+      <img src="img/careerbuilder.png" alt="Image 1" height="30" width="30">
+      Careerbuilder
+    </div>
+  </a>
+  <a href="https://www.careerjet.co.in/">
+    <div class="button shimmer">
+      <img src="img/careerjet.png" alt="Image 1" height="30" width="30">
+      Careerjet
+    </div>
+  </a>
+  <a href="https://apna.co/jobs">
+    <div class="button shimmer">
+      <img src="img/apna.png" alt="Image 1" height="30" width="30">
+      Apna
+    </div>
+  </a>
+  <a href="https://www.careerage.com/">
+    <div class="button shimmer">
+      <img src="img/careerage.png" alt="Image 1" height="30" width="30">
+      Careerage
+    </div>
+  </a>
+  <a href="https://www.workindia.in/">
+    <div class="button shimmer">
+      <img src="img/workindia.png" alt="Image 1" height="30" width="30">
+      Workindia
+    </div>
+  </a>
+  <a href="https://www.careesma.in/">
+    <div class="button shimmer">
+      <img src="img/careesma.png" alt="Image 1" height="30" width="30">
+      Careesma
+    </div>
+  </a>
+
+
+ 
+  </div>
+</div>
+</div>
+
+
+<div class="container" data-category="Movies">
+
+  <div class="name1">
+<p>Movie WebSites</p></div>
+<div class="buttonbox1">
+  
+  <div class="button-container">
+    <a href="https://www.azmovies.net/">
+    <div class="button shimmer">
+      <img src="img/azmovies.png" alt="Image 1" height="30" width="30"> Azmovies
+    </div>
+  </a>
+  <a href="https://www.123movies.com/">
+    <div class="button shimmer">
+      <img src="img/123movies.png" alt="Image 1" height="30" width="30"> 123movies
+    </div>
+  </a>
+  <a href="https://www.jiocinema.com/movies">
+    <div class="button shimmer">
+      <img src="img/jiocinema.png" alt="Image 1" height="30" width="30"> Jio Cinema
+    </div>
+  </a>
+  <a href="https://www.hotstar.com/in/movies">
+    <div class="button shimmer">
+      <img src="img/hotstar.png" alt="Image 1" height="30" width="30">
+      Hotstar
+    </div>
+  </a>
+  <a href="https://www.netflix.com/in/">
+    <div class="button shimmer">
+      <img src="img/netflix.png" alt="Image 1" height="30" width="30">
+      Netflix
+    </div>
+  </a>
+  <a href="https://www.primevideo.com/">
+    <div class="button shimmer">
+      <img src="img/primevideo.png" alt="Image 1" height="30" width="30">
+      Prime Video
+    </div>
+  </a>
+  <a href="https://www.sonyliv.com/">
+    <div class="button shimmer">
+      <img src="img/sonyliv.png" alt="Image 1" height="30" width="30">
+      Sony Liv
+    </div>
+  </a>
+  <a href="https://www.voot.com/">
+    <div class="button shimmer">
+      <img src="img/voot.png" alt="Image 1" height="30" width="30">
+      Voot
+    </div>
+  </a>
+  <a href="https://www.zee5.com/">
+    <div class="button shimmer">
+      <img src="img/zee5.png" alt="Image 1" height="30" width="30">
+      Zee5
+    </div>
+  </a>
+  <a href="https://www.mxplayer.in/">
+    <div class="button shimmer">
+      <img src="img/mxplayer.png" alt="Image 1" height="30" width="30">
+      MX Player
+    </div>
+  </a>
+  <a href="https://www.youtube.com/movies">
+    <div class="button shimmer">
+      <img src="img/ytmovies.png" alt="Image 1" height="30" width="30">
+      Youtube
+    </div>
+  </a>
+  <a href="https://www.sunnxt.com/">
+    <div class="button shimmer">
+      <img src="img/sunnxt.png" alt="Image 1" height="30" width="30">
+      Sun NXT
+    </div>
+  </a>
+  <a href="https://www.hungama.com/">
+    <div class="button shimmer">
+      <img src="img/hungama.png" alt="Image 1" height="30" width="30">
+     Hungama
+    </div>
+  </a>
+  <a href="https://www.viu.com/ott/in/en/hindi/">
+    <div class="button shimmer">
+      <img src="img/viu.png" alt="Image 1" height="30" width="30"> Viu
+    </div>
+  </a>
+
+  <a href="https://www.spuul.com/">
+    <div class="button shimmer">
+      <img src="img/spuul.png" alt="Image 1" height="30" width="30"> Spuul
+    </div>
+  </a>
+  <a href="https://www.bigflix.com/">
+    <div class="button shimmer">
+      <img src="img/bigflix.png" alt="Image 1" height="30" width="30"> Bigflix
+    </div>
+  </a>
+  <a href="https://www.erosnow.com/">
+    <div class="button shimmer">
+      <img src="img/erosnow.png" alt="Image 1" height="30" width="30"> Eros Now
+    </div>
+  </a>
+  <a href="https://www.hoichoi.tv/">
+    <div class="button shimmer">
+      <img src="img/hoichoi.png" alt="Image 1" height="30" width="30"> Hoichoi
+    </div>
+  </a>
+  <a href="https://www.vodafoneplay.in/">
+    <div class="button shimmer">
+      <img src="img/vodafoneplay.png" alt="Image 1" height="30" width="30">
+      Vodafone Play
+    </div>
+  </a>
+  <a href="https://www.airtelxstream.in/">
+    <div class="button shimmer">
+      <img src="img/airtelxstream.png" alt="Image 1" height="30" width="30">
+      Airtel Xstream
+    </div>
+  </a>
+
+
+
+ 
+  </div>
+</div>
+</div>
+
+
+<div class="container" data-category="Musics">
+
+  <div class="name1">
+<p>Musics WebSites</p></div>
+<div class="buttonbox1">
+  
+  <div class="button-container">
+    <a href="https://www.jiosaavn.com/">
+    <div class="button shimmer">
+      <img src="img/jiosavan.png" alt="Image 1" height="30" width="30"> JioSaavn
+    </div>
+  </a>
+  <a href="https://www.youtube.com/">
+    <div class="button shimmer">
+      <img src="img/youtube.png" alt="Image 1" height="30" width="30"> Youtube
+    </div>
+  </a>
+  <a href="https://www.spotify.com/in/">
+    <div class="button shimmer">
+      <img src="img/savan.png" alt="Image 1" height="30" width="30"> Spotify
+    </div>
+  </a>
+  <a href="https://gaana.com/">
+    <div class="button shimmer">
+      <img src="img/gaana.png" alt="Image 1" height="30" width="30"> Gaana
+    </div>
+  </a>
+  <a href="https://www.amazon.in/music">
+    <div class="button shimmer">
+      <img src="img/amazon.png" alt="Image 1" height="30" width="30"> Amazon Music
+    </div>
+  </a>
+  <a href="https://music.apple.com/in/browse">
+    <div class="button shimmer">
+      <img src="img/music.apple..png" alt="Image 1" height="30" width="30"> Apple Music
+    </div>
+  </a>
+  <a href="https://www.wynk.in/">
+    <div class="button shimmer">
+      <img src="img/wynk.png" alt="Image 1" height="30" width="30"> Wynk Music
+    </div>
+  </a>
+  <a href="https://www.hungama.com/">
+    <div class="button shimmer">
+      <img src="img/hungama.png" alt="Image 1" height="30" width="30"> Hungama
+    </div>
+  </a>
+  <a href="https://www.shazam.com/">
+    <div class="button shimmer">
+      <img src="img/shazam.png" alt="Image 1" height="30" width="30"> Shazam
+    </div>
+  </a>
+  
+  <a href="https://www.raaga.com/">
+    <div class="button shimmer">
+      <img src="img/raaga.png" alt="Image 1" height="30" width="30"> Raaga
+    </div>
+  </a>
+  
+  <a href="https://www.pandora.com/">
+    <div class="button shimmer">
+      <img src="img/pandora.png" alt="Image 1" height="30" width="30">Pandora
+    </div>
+  </a>
+ 
+ 
+  </div>
+</div>
+</div>
+
+
+
+<div class="container" data-category="Newsread">
+
+  <div class="name1">
+<p>News WebSites</p></div>
+<div class="buttonbox1">
+  
+  <div class="button-container">
+    <a href="https://news.google.com/">
+    <div class="button shimmer">
+      <img src="img/googlenews.png" alt="Image 1" height="30" width="30"> Google News
+    </div>
+  </a>
+  <a href="https://www.bing.com/news">
+    <div class="button shimmer">
+      <img src="img/bing.png" alt="Image 1" height="30" width="30"> Bing News
+    </div>
+  </a>
+  <a href="https://www.yahoo.com/news/">
+    <div class="button shimmer">
+      <img src="img/yahoo.jpg" alt="Image 1" height="30" width="30"> Yahoo News
+    </div>
+  </a>
+  <a href="https://www.huffpost.com/news/">
+    <div class="button shimmer">
+      <img src="img/huffpost.jpg" alt="Image 1" height="30" width="30">
+      Huffpost
+    </div>
+  </a>
+
+  <a href="https://www.indiatoday.in/">
+    <div class="button shimmer">
+      <img src="img/indiatoday.jpg" alt="Image 1" height="30" width="30">
+      India Today
+    </div>
+  </a>
+  <a href="https://www.ndtv.com/">
+    <div class="button shimmer">
+      <img src="img/ndtv.jpg" alt="Image 1" height="30" width="30">
+      NDTV
+    </div>
+  </a>
+  <a href="https://www.news18.com/">
+    <div class="button shimmer">
+      <img src="img/news18.png" alt="Image 1" height="30" width="30">
+      News18
+    </div>
+  </a>
+
+  <a href="https://www.indiatvnews.com/">
+    <div class="button shimmer">
+      <img src="img/indiatvnews.png" alt="Image 1" height="30" width="30">
+      India TV
+    </div>
+  </a>
+  <a href="https://www.republicworld.com/india-news">
+    <div class="button shimmer">
+      <img src="img/republicworld.png" alt="Image 1" height="30" width="30">
+      Republic World
+    </div>
+  </a>
+  <a href="https://www.timesnownews.com/india">
+    <div class="button shimmer">
+      <img src="img/timesnownews.jpg" alt="Image 1" height="30" width="30">
+      Times Now
+    </div>
+  </a>
+
+  <a href="https://www.thehindu.com/news/">
+    <div class="button shimmer">
+      <img src="img/thehindu.png" alt="Image 1" height="30" width="30">
+      The Hindu
+    </div>
+  </a>
+
+
+  <a href="https://www.firstpost.com/india">
+    <div class="button shimmer">
+      <img src="img/firstpost.png" alt="Image 1" height="30" width="30">
+      First Post
+    </div>
+  </a>
+  <a href="https://www.financialexpress.com/india-news/">
+    <div class="button shimmer">
+      <img src="img/financialexpress.jpg" alt="Image 1" height="30" width="30">
+      Financial Express
+    </div>
+  </a>
+  <a href="https://www.deccanchronicle.com/nation/current-affairs/">
+    <div class="button shimmer">
+      <img src="img/deccanchronicle.jpg" alt="Image 1" height="30" width="30">
+     Deccan Chronicle
+    </div>
+  </a>
+
+  <a href="https://www.deccanherald.com/national">
+    <div class="button shimmer">
+      <img src="img/deccanherald.png" alt="Image 1" height="30" width="30"> Deccan Herald
+    </div>
+  </a>
+  <a href="https://www.newindianexpress.com/nation/">
+    <div class="button shimmer">
+      <img src="img/newindianexpress.png" alt="Image 1" height="30" width="30"> New Indian Express
+    </div>
+  </a>
+  <a href="https://www.thehindubusinessline.com/news/national/">
+    <div class="button shimmer">
+      <img src="img/thehindubusinessline.png" alt="Image 1" height="30" width="30"> Hindu Business Line
+    </div>
+  </a>
+
+  <a href="https://www.bbc.com/news">
+    <div class="button shimmer">
+      <img src="img/bbc.png" alt="Image 1" height="30" width="30"> BBC News
+    </div>
+  </a>
+  
+  <a href="https://www.nytimes.com/">
+    <div class="button shimmer">
+      <img src="img/nytimes.png" alt="Image 2" height="30" width="30"> The New York Times
+    </div>
+  </a>
+  
+  <a href="https://www.theguardian.com/international">
+    <div class="button shimmer">
+      <img src="img/theguardian.png" alt="Image 3" height="30" width="30"> The Guardian
+    </div>
+  </a>
+  
+  <a href="https://edition.cnn.com/">
+    <div class="button shimmer">
+      <img src="img/edition.png" alt="Image 4" height="30" width="30"> CNN
+    </div>
+  </a>
+  
+  <a href="https://www.reuters.com/">
+    <div class="button shimmer">
+      <img src="img/reuters.png" alt="Image 5" height="30" width="30"> Reuters
+    </div>
+  </a>
+  
+  <a href="https://www.aljazeera.com/">
+    <div class="button shimmer">
+      <img src="img/aljazeera.png" alt="Image 6" height="30" width="30"> Al Jazeera
+    </div>
+  </a>
+  
+  <a href="https://www.washingtonpost.com/">
+    <div class="button shimmer">
+      <img src="img/washingtonpost.png" alt="Image 7" height="30" width="30"> The Washington Post
+    </div>
+  </a>
+  
+  
+ 
+  </div>
+</div>
+</div>
+
+
+<div class="container" data-category="Novel">
+
+  <div class="name1">
+<p>Novel WebSites</p></div>
+<div class="buttonbox1">
+  
+  <div class="button-container">
+
+
+
+
+
+
+
+
+
+    <a href="https://www.fanfiction.net/">
+      <div class="button shimmer">
+        <img src="img/fanfiction.png" alt="Image 1" height="30" width="30"> FanFiction
+      </div>
+    </a>
+    <a href="https://www.scribd.com/">
+      <div class="button shimmer">
+        <img src="img/scribd.png" alt="Image 1" height="30" width="30"> Scribd
+      </div>
+    </a>
+    <a href="https://www.pratilipi.com/">
+    <div class="button shimmer">
+      <img src="img/pratilipi.png" alt="Image 1" height="30" width="30"> Pratilipi
+    </div>
+  </a>
+
+  <a href="https://archive.org/">
+    <div class="button shimmer">
+      <img src="img/archive.png" alt="Image 1" height="30" width="30"> Archive
+    </div>
+  </a>
+  <a href="https://www.wuxiaworld.com/">
+    <div class="button shimmer">
+      <img src="img/wuxiaworld.png" alt="Image 1" height="30" width="30"> Wuxiaworld
+    </div>
+  </a>
+  <a href="https://www.wattpad.com/">
+    <div class="button shimmer">
+      <img src="img/wattpad.png" alt="Image 1" height="30" width="30"> Wattpad
+    </div>
+  </a>
+   <a href="https://www.webnovel.com/###">
+    <div class="button shimmer">
+      <img src="img/webnovel.png" alt="Image 1" height="30" width="30"> Webnovel
+    </div>
+  </a>
+  <a href="https://kkstories.com/">
+    <div class="button shimmer">
+      <img src="img/kkstories.png" alt="Image 1" height="30" width="30"> KKstories
+    </div>
+  </a>
+  <a href="https://www.moboreader.com/">
+    <div class="button shimmer">
+      <img src="img/moboreader.png" alt="Image 1" height="30" width="30"> Moboreader
+    </div>
+  </a>
+ <a href="https://www.inkitt.com/">
+    <div class="button shimmer">
+      <img src="img/inkitt.png" alt="Image 1" height="30" width="30"> Inkitt
+    </div>
+  </a>
+
+
+ 
+  </div>
+</div>
+</div>
+
+
+
+
+
+<div class="container" data-category="Parenting">
+
+  <div class="name1">
+<p>Parenting WebSites</p></div>
+<div class="buttonbox1">
+  
+  <div class="button-container">
+
+    <a href="https://www.babynames.com/">
+      <div class="button shimmer">
+        <img src="img/babynames.jpg" alt="Baby Names Logo" height="30" width="30"> Baby Names
+      </div>
+    </a>
+    <a href="https://www.hindubabynames.com/">
+      <div class="button shimmer">
+        <img src="img/hindubabynames.jpg" alt="Hindu Baby Names Logo" height="30" width="30"> Hindu Baby Names
+      </div>
+    </a>
+    <a href="https://www.momjunction.com/">
+      <div class="button shimmer">
+        <img src="img/momjunction.png" alt="Mom Junction Logo" height="30" width="30"> Mom Junction
+      </div>
+    </a>
+    
+    <a href="https://www.kyakaise.com/">
+      <div class="button shimmer">
+        <img src="img/kyakaise.jpg" alt="Kya Kaise Logo" height="30" width="30"> Kya Kaise
+      </div>
+    </a>
+    <a href="https://www.opscotch.com/">
+      <div class="button shimmer">
+        <img src="img/opscotch.jpg" alt="Op Scotch Logo" height="30" width="30"> Op Scotch
+      </div>
+    </a>
+    <a href="https://www.babycenter.com/">
+      <div class="button shimmer">
+        <img src="img/babycenter.jpg" alt="Baby Center Logo" height="30" width="30"> Baby Center
+      </div>
+    </a>
+    <a href="https://kidshealth.org/">
+      <div class="button shimmer">
+        <img src="img/kidshealth.jpg" alt="Kids Health Logo" height="30" width="30"> Kids Health
+      </div>
+    </a>
+    <a href="https://www.parenting.com/">
+      <div class="button shimmer">
+        <img src="img/parenting.jpg" alt="Parenting Logo" height="30" width="30"> Parenting
+      </div>
+    </a>
+    <a href="https://www.parents.com/">
+      <div class="button shimmer">
+        <img src="img/parents.jpg" alt="Parents Logo" height="30" width="30"> Parents
+      </div>
+    </a>
+    
+    <a href="https://www.whattoexpect.com/">
+      <div class="button shimmer">
+        <img src="img/whattoexpect.jpg" alt="What To Expect Logo" height="30" width="30"> What To Expect
+      </div>
+    </a>
+    <a href="https://www.babygaga.com/">
+      <div class="button shimmer">
+        <img src="img/babygaga.jpg" alt="Baby Gaga Logo" height="30" width="30"> Baby Gaga
+      </div>
+    </a>
+   
+
+
+ 
+  </div>
+</div>
+</div>
+
+
+
+
+<div class="container" data-category="SearchEngines">
+
+  <div class="name1">
+<p>SearchEngines WebSites</p></div>
+<div class="buttonbox1">
+  
+  <div class="button-container">
+
+
+
+
+
+    
+    
+    <a href="https://www.google.co.in/">
+      <div class="button shimmer">
+        <img src="img/google.png" alt="Image 1" height="30" width="30"> Google
+      </div>
+    </a>
+    <a href="https://www.bing.com/">
+      <div class="button shimmer">
+        <img src="img/bing.jpg" alt="Image 1" height="30" width="30"> Bing
+      </div>
+    </a>
+    <a href="https://duckduckgo.com/">
+      <div class="button shimmer">
+        <img src="img/duckduck.png" alt="Image 1" height="30" width="30"> DuckDuckGo
+      </div>
+    </a>
+    
+   
+      <a href="https://www.ecosia.org/?c=en">
+      <div class="button shimmer">
+        <img src="img/ecosia.jpg" alt="Image 1" height="30" width="30"> Ecosia
+      </div>
+    </a>
+    <a href="https://search.yahoo.com/?fr2=inr">
+      <div class="button shimmer">
+        <img src="img/yahoo.png" alt="Image 1" height="30" width="30"> Yahoo!
+      </div>
+    </a>
+    <a href="https://www.baidu.com/">
+      <div class="button shimmer">
+        <img src="img/baidu.png" alt="Image 1" height="30" width="30"> Baidu
+      </div>
+    </a>
+   
+      <a href="https://yandex.com/">
+      <div class="button shimmer">
+        <img src="img/yandex.jpg" alt="Image 1" height="30" width="30"> Yandex
+      </div>
+    </a>
+    <a href="https://www.ask.com/">
+      <div class="button shimmer">
+        <img src="img/swisscows.jpg" alt="Image 1" height="30" width="30"> Ask
+      </div>
+    </a>
+    <a href="https://search.aol.com/">
+      <div class="button shimmer">
+        <img src="img/startpage.jpg" alt="Image 1" height="30" width="30"> Aol
+      </div>
+    </a>
+   
+    
+      <a href="https://www.wolframalpha.com/input/?i=search+engine">
+      <div class="button shimmer">
+        <img src="img/wolframalpha.png" alt="Image 1" height="30" width="30"> Wolframalpha
+      </div>
+    </a>
+    <a href="https://swisscows.com/en">
+      <div class="button shimmer">
+        <img src="img/swisscows.jpg" alt="Image 1" height="30" width="30"> Swisscows
+      </div>
+    </a>
+    <a href="https://www.startpage.com/">
+      <div class="button shimmer">
+        <img src="img/startpage.jpg" alt="Image 1" height="30" width="30"> Startpage
+      </div>
+    </a>
+   
+      <a href="https://www.qwant.com/?l=en">
+      <div class="button shimmer">
+        <img src="img/qwant.jpg" alt="Image 1" height="30" width="30"> Qwant
+      </div>
+    </a>
+    <a href="https://m.naver.com/">
+      <div class="button shimmer">
+        <img src="img/naver.jpg" alt="Image 1" height="30" width="30"> Naver
+      </div>
+    </a>
+    <a href="https://napoveda.seznam.cz/en/seznamcz-web-search/">
+      <div class="button shimmer">
+        <img src="img/seznam.png" alt="Image 1" height="30" width="30"> Seznamcz
+      </div>
+    </a>
+   
+      <a href="https://www.dogpile.com/">
+      <div class="button shimmer">
+        <img src="img/dogpilee.jpg" alt="Image 1" height="30" width="30"> Dogpile
+      </div>
+    </a>
+    <a href="https://www.ekoru.org/">
+      <div class="button shimmer">
+        <img src="img/ekoru.png" alt="Image 1" height="30" width="30"> Ekoru
+      </div>
+    </a>
+    <a href="https://www.mojeek.com/">
+      <div class="button shimmer">
+        <img src="img/mojeek.svg" alt="Image 1" height="30" width="30"> Mojeek
+      </div>
+    </a>
+   
+      <a href="https://gibiru.com/">
+      <div class="button shimmer">
+        <img src="img/gibiru.png" alt="Image 1" height="30" width="30"> Gibiru
+      </div>
+    </a>
+    <a href="https://www.oscobo.com/">
+      <div class="button shimmer">
+        <img src="img/oscobo.jpg" alt="Image 1" height="30" width="30"> Oscobo
+      </div>
+    </a>
+    <a href="https://metager.org/">
+      <div class="button shimmer">
+        <img src="img/metager.svg" alt="Image 1" height="30" width="30"> Metager
+      </div>
+    </a>
+   
+    
+      <a href="https://www.onesearch.com/">
+      <div class="button shimmer">
+        <img src="img/onesearch.png" alt="Image 1" height="30" width="30"> Onesearch
+      </div>
+    </a>
+    <a href="https://swisscows.com/en">
+      <div class="button shimmer">
+        <img src="img/swisscows.jpg" alt="Image 1" height="30" width="30"> Swisscows
+      </div>
+    </a>
+    <a href="https://www.startpage.com/">
+      <div class="button shimmer">
+        <img src="img/startpage.jpg" alt="Image 1" height="30" width="30"> Startpage
+      </div>
+    </a>
+  </div>
+</div>
+</div>
+
+
+
+
+<div class="container" data-category="Shopping">
+
+  <div class="name1">
+<p>Shopping WebSites</p></div>
+<div class="buttonbox1">
+  
+  <div class="button-container">
+    <a href="https://www.flipkart.com/">
+    <div class="button shimmer">
+      <img src="img/flipkart.png" alt="Image 1" height="30" width="30"> Flipkart
+    </div>
+  </a>
+  <a href="https://www.amazon.in/">
+    <div class="button shimmer">
+      <img src="img/amazon.jpg" alt="Image 1" height="30" width="30"> Amazon
+    </div>
+  </a>
+  <a href="https://www.myntra.com/">
+    <div class="button shimmer">
+      <img src="img/myntra.png" alt="Image 1" height="30" width="30">
+      Myntra
+    </div>
+  </a>
+  <a href="https://www.snapdeal.com/">
+    <div class="button shimmer">
+      <img src="img/snapdeal.jpg" alt="Image 1" height="30" width="30">
+      Snapdeal
+    </div>
+  </a>
+
+  <a href="https://www.shopclues.com/">
+    <div class="button shimmer">
+      <img src="img/shopclues,jpg.jpg" alt="Image 1" height="30" width="30">
+      Shopclues
+    </div>
+  </a>
+  <a href="https://www.tatacliq.com/">
+    <div class="button shimmer">
+      <img src="img/tatacliq.jpg" alt="Image 1" height="30" width="30">
+      Tatacliq
+    </div>
+  </a>
+  <a href="https://www.jabong.com/">
+    <div class="button shimmer">
+      <img src="img/jabong.jpg" alt="Image 1" height="30" width="30">
+      Jabong
+    </div>
+  </a>
+  <a href="https://www.firstcry.com/">
+    <div class="button shimmer">
+      <img src="img/firstcry.jpg" alt="Image 1" height="30" width="30">
+      Firstcry
+    </div>
+  </a>
+  <a href="https://www.ajio.com/">
+    <div class="button shimmer">
+      <img src="img/ajio.jpg" alt="Image 1" height="30" width="30">
+      Ajio
+    </div>
+  </a>
+  <a href="https://www.nike.com/in/">
+    <div class="button shimmer">
+      <img src="img/nike.png" alt="Image 1" height="30" width="30">
+      Nike
+    </div>
+  </a>
+
+<!--   
+  <a href="https://www.myntra.com/">
+    <div class="button shimmer">
+      <img src="tv9 kannada.png" alt="Image 1" height="30" width="30">
+      Myntra
+    </div>
+  </a>
+  <a href="https://www.shopclues.com/">
+    <div class="button shimmer">
+      <img src="tv9 kannada.png" alt="Image 1" height="30" width="30">
+      Shopclues
+    </div>
+  </a>
+  <a href="https://www.tatacliq.com/">
+    <div class="button shimmer">
+      <img src="tv9 kannada.png" alt="Image 1" height="30" width="30">
+     Tatacliq
+    </div>
+  </a>
+  <a href="https://www.amazon.com/">
+    <div class="button shimmer">
+      <img src="tv9 kannada.png" alt="Image 1" height="30" width="30">
+      Amazon
+    </div>
+  </a> -->
+  <a href="https://www.ebay.com/">
+    <div class="button shimmer">
+      <img src="img/ebay.jpg" alt="Image 1" height="30" width="30">
+      eBay
+    </div>
+  </a>
+  <a href="https://www.walmart.com/">
+    <div class="button shimmer">
+      <img src="img/walmart.png" alt="Image 1" height="30" width="30">
+      Walmart
+    </div>
+  </a>
+  <a href="https://www.target.com/">
+    <div class="button shimmer">
+      <img src="img/target.png" alt="Image 1" height="30" width="30">
+      Target
+    </div>
+  </a>
+  <a href="https://www.bestbuy.com/">
+    <div class="button shimmer">
+      <img src="img/bestbuy.jpg" alt="Image 1" height="30" width="30">
+      Best Buy
+    </div>
+  </a>
+ 
+  <a href="https://www.alibaba.com/">
+    <div class="button shimmer">
+      <img src="img/alibaba.png" alt="Image 1" height="30" width="30">
+      Alibaba
+    </div>
+  </a>
+  
+  <a href="https://www.etsy.com/">
+    <div class="button shimmer">
+      <img src="img/etsy.jpg" alt="Image 1" height="30" width="30">
+      Etsy
+    </div>
+  </a>
+  <a href="https://www.costco.com/">
+    <div class="button shimmer">
+      <img src="img/costco.jpg" alt="Image 1" height="30" width="30">
+      Costco
+    </div>
+  </a>
+  <a href="https://www.shopify.com/">
+    <div class="button shimmer">
+      <img src="img/shopify.jpg" alt="Image 1" height="30" width="30">
+      Shopify
+    </div>
+  </a>
+  <a href="https://www.newegg.com/">
+    <div class="button shimmer">
+      <img src="img/newegg.jpg" alt="Image 1" height="30" width="30">
+      Newegg
+    </div>
+  </a>
+  <a href="https://www.overstock.com/">
+    <div class="button shimmer">
+      <img src="img/overstock.png" alt="Image 1" height="30" width="30">
+      Overstock
+    </div>
+  </a>
+  <a href="https://www.zappos.com/">
+    <div class="button shimmer">
+      <img src="img/zappos.jpg" alt="Image 1" height="30" width="30">
+      Zappos
+    </div>
+  </a>
+  <a href="https://www.wayfair.com/">
+    <div class="button shimmer">
+      <img src="img/wayfair.jpg" alt="Image 1" height="30" width="30">
+      Wayfair
+    </div>
+  </a>
+  <a href="https://www.asos.com/">
+    <div class="button shimmer">
+      <img src="img/asos.png" alt="Image 1" height="30" width="30">
+      ASOS
+    </div>
+  </a>
+  <a href="https://www.macys.com/">
+    <div class="button shimmer">
+      <img src="img/macys.jpg" alt="Image 1" height="30" width="30">
+      Macy's
+    </div>
+  </a>
+ 
+  <a href="https://www.adidas.com/">
+    <div class="button shimmer">
+      <img src="img/adidas.png" alt="Image 1" height="30" width="30">
+      Adidas
+    </div>
+  </a>
+  <a href="https://www.apple.com/">
+    <div class="button shimmer">
+      <img src="img/apple.jpg" alt="Image 1" height="30" width="30">
+      Apple
+    </div>
+  </a>
+  <a href="https://www.samsung.com/">
+    <div class="button shimmer">
+      <img src="img/samsung.jpg" alt="Image 1" height="30" width="30">
+      Samsung
+    </div>
+  </a>
+  <a href="https://www.gap.com/">
+    <div class="button shimmer">
+      <img src="img/gap.png" alt="Image 1" height="30" width="30">
+      Gap
+    </div>
+  </a>
+  <a href="https://www.zara.com/">
+    <div class="button shimmer">
+      <img src="img/zara.png" alt="Image 1" height="30" width="30">
+      Zara
+    </div>
+  </a>
+  <a href="https://www.hm.com/">
+    <div class="button shimmer">
+      <img src="img/hm.png" alt="Image 1" height="30" width="30">
+      H&M
+    </div>
+  </a>
+  <a href="https://www.uniqlo.com/">
+    <div class="button shimmer">
+      <img src="img/uniqlo.png" alt="Image 1" height="30" width="30">
+      Uniqlo
+    </div>
+  </a>
+  <a href="https://www.ikea.com/">
+    <div class="button shimmer">
+      <img src="img/ikea.jpg" alt="Image 1" height="30" width="30">
+      IKEA
+    </div>
+  </a>
+  <a href="https://www.sephora.com/">
+    <div class="button shimmer">
+      <img src="img/sephora.jpg" alt="Image 1" height="30" width="30">
+      Sephora
+    </div>
+  </a>
+  <a href="https://www.underarmour.com/">
+    <div class="button shimmer">
+      <img src="img/underarmour.jpg" alt="Image 1" height="30" width="30">
+      Under Armour
+    </div>
+  </a>
+  <a href="https://www.victoriassecret.com/">
+    <div class="button shimmer">
+      <img src="img/victoriassecret.png" alt="Image 1" height="30" width="30">
+      Victoria's Secret
+    </div>
+  </a>
+  <a href="https://www.lululemon.com/">
+    <div class="button shimmer">
+      <img src="img/lululemon.jpg" alt="Image 1" height="30" width="30">
+      Lululemon
+    </div>
+  </a>
+  <a href="https://www.reebok.com/">
+    <div class="button shimmer">
+      <img src="img/reebok.jpg" alt="Image 1" height="30" width="30">
+      Reebok
+    </div>
+  </a>
+
+ 
+  <a href="https://www.aliexpress.com/">
+    <div class="button shimmer">
+      <img src="img/aliexpress.png" alt="Image 1" height="30" width="30">
+      AliExpress
+    </div>
+  </a>
+
+  <a href="https://www.homedepot.com/">
+    <div class="button shimmer">
+      <img src="img/homedepot.jpg" alt="Image 1" height="30" width="30">
+      Home Depot
+    </div>
+  </a>
+  <a href="https://www.lowes.com/">
+    <div class="button shimmer">
+      <img src="img/lowes.png" alt="Image 1" height="30" width="30">
+      Lowe's
+    </div>
+  </a>
+  <a href="https://www.bedbathandbeyond.com/">
+    <div class="button shimmer">
+      <img src="img/bedbathandbeyond.png" alt="Image 1" height="30" width="30">
+      Bed Bath & Beyond
+    </div>
+  </a>
+  <a href="https://www.kohls.com/">
+    <div class="button shimmer">
+      <img src="img/kohls.jpg" alt="Image 1" height="30" width="30">
+      Kohl's
+    </div>
+  </a>
+  <a href="https://www.acehardware.com/">
+    <div class="button shimmer">
+      <img src="img/acehardware.png" alt="Image 1" height="30" width="30">
+      Ace Hardware
+    </div>
+  </a>
+
+  </div>
+</div>
+</div>
+
+
+
+<div class="container" data-category="Socialmedia">
+
+  <div class="name1">
+<p>Socialmedia WebSites</p></div>
+<div class="buttonbox1">
+  
+  <div class="button-container">
+
+
+
+
+
+
+    <a href="https://sharechat.com/">
+      <div class="button shimmer">
+        <img src="img/sharechat.png" alt="Image 1" height="30" width="30"> sharechat
+      </div>
+    </a>
+    <a href="https://www.facebook.com/messenger/">
+      <div class="button shimmer">
+        <img src="img/facebook.png" alt="Image 1" height="30" width="30"> Facebook
+      </div>
+    </a>
+    <a href="https://www.twitter.com/">
+      <div class="button shimmer">
+        <img src="img/twitter.png" alt="Image 1" height="30" width="30"> Twitter X
+      </div>
+    </a>
+    <a href="https://www.instagram.com/">
+      <div class="button shimmer">
+        <img src="img/instagram.png" alt="Image 1" height="30" width="30"> Instagram
+      </div>
+    </a>
+    <a href="https://www.whatsapp.com/">
+      <div class="button shimmer">
+        <img src="img/whatsapp.png" alt="Image 1" height="30" width="30"> Whatsapp
+      </div>
+    </a>
+    <a href="https://www.snapchat.com/">
+      <div class="button shimmer">
+        <img src="img/snapchat.png" alt="Image 1" height="30" width="30"> Snapchat
+      </div>
+    </a>
+    <a href="https://www.linkedin.com/">
+      <div class="button shimmer">
+        <img src="img/linkedin.png" alt="Image 1" height="30" width="30"> Linkedin
+      </div>
+    </a>
+    <a href="https://www.pinterest.com/">
+      <div class="button shimmer">
+        <img src="img/pinterest.png" alt="Image 1" height="30" width="30"> Pinterest
+      </div>
+    </a>
+    <a href="https://www.tumblr.com/">
+      <div class="button shimmer">
+        <img src="img/tumblr.png" alt="Image 1" height="30" width="30"> Tumblr
+      </div>
+    </a>
+    <a href="https://www.reddit.com/">
+      <div class="button shimmer">
+        <img src="img/reddit.png" alt="Image 1" height="30" width="30"> Reddit
+      </div>
+    </a>
+    <a href="https://www.quora.com/">
+      <div class="button shimmer">
+        <img src="img/quora.png" alt="Image 1" height="30" width="30"> Quora
+      </div>
+    </a>
+    <a href="https://www.tiktok.com/">
+      <div class="button shimmer">
+        <img src="img/tiktok.png" alt="Image 1" height="30" width="30"> Tiktok
+      </div>
+    </a>
+    <a href="https://www.youtube.com/">
+      <div class="button shimmer">
+        <img src="img/youtube.png" alt="Image 1" height="30" width="30"> Youtube
+      </div>
+    </a>
+    <a href="https://www.twitch.tv/">
+      <div class="button shimmer">
+        <img src="img/twitch.png" alt="Image 1" height="30" width="30"> Twitch
+      </div>
+    </a>
+    <a href="https://www.flickr.com/">
+      <div class="button shimmer">
+        <img src="img/flickr.png" alt="Image 1" height="30" width="30"> Flickr
+      </div>
+    </a>
+    <a href="https://www.vimeo.com/">
+      <div class="button shimmer">
+        <img src="img/vimeo.png" alt="Image 1" height="30" width="30"> Vimeo
+      </div>
+    </a>
+    <a href="https://www.myspace.com/">
+      <div class="button shimmer">
+        <img src="img/myspace.png" alt="Image 1" height="30" width="30"> Myspace
+      </div>
+    </a>
+    <a href="https://www.meetup.com/">
+      <div class="button shimmer">
+        <img src="img/meetup.png" alt="Image 1" height="30" width="30"> Meetup
+      </div>
+    </a>
+    <a href="https://www.meetme.com/">
+      <div class="button shimmer">
+        <img src="img/meetme.png" alt="Image 1" height="30" width="30"> Meetme
+      </div>
+    </a>
+    <a href="https://www.tagged.com/">
+      <div class="button shimmer">
+        <img src="img/tagged.png" alt="Image 1" height="30" width="30"> Tagged
+      </div>
+    </a>
+    <a href="https://www.classmates.com/">
+      <div class="button shimmer">
+        <img src="img/classmates.png" alt="Image 1" height="30" width="30"> Classmates
+      </div>
+    </a>
+    
+    <a href="https://www.minds.com/">
+      <div class="button shimmer">
+        <img src="img/minds.png" alt="Image 1" height="30" width="30"> Minds
+      </div>
+    </a>
+    
+  
+    <a href="https://www.mewe.com/">
+      <div class="button shimmer">
+        <img src="img/mewe.png" alt="Image 1" height="30" width="30"> Mewe
+      </div>
+    </a>
+    <a href="https://www.nextdoor.com/">
+      <div class="button shimmer">
+        <img src="img/nextdoor.png" alt="Image 1" height="30" width="30"> Nextdoor
+      </div>
+    </a>
+    <a href="https://www.ello.co/">
+      <div class="button shimmer">
+        <img src="img/ello.png" alt="Image 1" height="30" width="30"> Ello
+      </div>
+    </a>
+    <a href="https://www.flixster.com/">
+      <div class="button shimmer">
+        <img src="img/flixster.png" alt="Image 1" height="30" width="30"> Flixster
+      </div>
+    </a>
+    <a href="https://www.foursquare.com/">
+      <div class="button shimmer">
+        <img src="img/foursquare.png" alt="Image 1" height="30" width="30"> Foursquare
+      </div>
+    </a>
+    <a href="https://www.gaia.com/">
+      <div class="button shimmer">
+        <img src="img/gaia.png" alt="Image 1" height="30" width="30"> Gaia
+      </div>
+    </a>
+    <a href="https://www.goodreads.com/">
+      <div class="button shimmer">
+        <img src="img/goodreads.png" alt="Image 1" height="30" width="30"> Goodreads
+      </div>
+  
+    </a>
+    <a href="https://www.hi5.com/">
+      <div class="button shimmer">
+        <img src="img/hi5.png" alt="Image 1" height="30" width="30">
+        Hi5
+      </div>
+    </a>
+    <a href="https://www.last.fm/">
+      <div class="button shimmer">
+        <img src="img/last.png" alt="Image 1" height="30" width="30">
+        Last.fm
+      </div>
+    </a>
+    <a href="https://www.livejournal.com/">
+      <div class="button shimmer">
+        <img src="img/livejournal.png" alt="Image 1" height="30" width="30">
+        LiveJournal
+      </div>
+    </a>
+    <a href="https://www.mastodon.social/about">
+      <div class="button shimmer">
+        <img src="img/mastodon.png" alt="Image 1" height="30" width="30">
+        Mastodon
+      </div>
+    </a>
+    
+  </div>
+</div>
+</div>
+
+
+
+
+<div class="container" data-category="Sports">
+
+  <div class="name1">
+<p>Sports WebSites</p></div>
+<div class="buttonbox1">
+  
+  <div class="button-container">
+    
+
+
+
+
+      <a href="https://www.espn.com/">
+        <div class="button shimmer">
+          <img src="img/espn.png" alt="ESPN Logo" height="30" width="30"> ESPN
+        </div>
+      </a>
+      <a href="https://www.bbc.co.uk/sport">
+        <div class="button shimmer">
+          <img src="img/bbcsport.png" alt="BBC Sport Logo" height="30" width="30"> BBC Sport
+        </div>
+      </a>
+      <a href="https://www.sportsnet.ca/">
+        <div class="button shimmer">
+          <img src="img/sportnet.png" alt="Sportsnet Logo" height="30" width="30"> Sportsnet
+        </div>
+      </a>
+
+      <a href="https://www.foxsports.com/">
+        <div class="button shimmer">
+          <img src="img/foxsports.jpg" alt="Fox Sports Logo" height="30" width="30"> Fox Sports
+        </div>
+      </a>
+      <a href="https://www.cbssports.com/">
+        <div class="button shimmer">
+          <img src="img/cbssports.jpg" alt="CBS Sports Logo" height="30" width="30"> CBS Sports
+        </div>
+      </a>
+      <a href="https://www.sportingnews.com/">
+        <div class="button shimmer">
+          <img src="img/sportingnews.png" alt="Sporting News Logo" height="30" width="30"> Sporting News
+        </div>
+      </a>
+
+      <a href="https://www.si.com/">
+        <div class="button shimmer">
+          <img src="img/si.jpg" alt="Sports Illustrated Logo" height="30" width="30"> Sports Illustrated
+        </div>
+      </a>
+      <a href="https://www.nbcsports.com/">
+        <div class="button shimmer">
+          <img src="img/nbcsports.png" alt="NBC Sports Logo" height="30" width="30"> NBC Sports
+        </div>
+      </a>
+      <a href="https://www.skysports.com/">
+        <div class="button shimmer">
+          <img src="img/skysports.png" alt="Sky Sports Logo" height="30" width="30"> Sky Sports
+        </div>
+      </a>
+      <a href="https://www.bleacherreport.com/">
+        <div class="button shimmer">
+          <img src="img/bleacherreport.png" alt="Bleacher Report Logo" height="30" width="30"> Bleacher Report
+        </div>
+      </a>
+      <a href="https://www.thescore.com/">
+        <div class="button shimmer">
+          <img src="img/thescore.jpg" alt="The Score Logo" height="30" width="30"> The Score
+        </div>
+      </a>
+      <a href="https://www.foxsportsasia.com/">
+        <div class="button shimmer">
+          <img src="img/foxsportsasia.png" alt="Fox Sports Asia Logo" height="30" width="30"> Fox Sports Asia
+        </div>
+      </a>
+
+  </div>
+</div>
+</div>
+
+
+
+<div class="container" data-category="Weddings">
+
+  <div class="name1">
+<p>Weddings WebSites</p></div>
+<div class="buttonbox1">
+  
+  <div class="button-container">
+    <a href="https://www.kannadamatrimony.com/">
+    <div class="button shimmer">
+      <img src="img/kannadamatrimony.png" alt="Image 1" height="30" width="30"> Kannada Matrimony
+    </div>
+  </a>
+  <a href="https://www.telugumatrimony.com/">
+    <div class="button shimmer">
+      <img src="img/telugumatrimony.jpg" alt="Image 1" height="30" width="30"> Telugu Matrimony
+    </div>
+  </a>
+  <a href="https://www.tamilmatrimony.com/">
+    <div class="button shimmer">
+      <img src="img/tamilmatrimony.png" alt="Image 1" height="30" width="30"> Tamil Matrimony
+    </div>
+  </a>
+  <a href="https://www.hindimatrimony.com/">
+    <div class="button shimmer">
+      <img src="img/hindim.png" alt="Image 1" height="30" width="30"> Hindi Matrimony
+    </div>
+  </a>
+  <a href="https://www.malayaleematrimony.com/">
+    <div class="button shimmer">
+      <img src="img/keralam.jpg" alt="Image 1" height="30" width="30"> Malayalam Matrimony
+    </div>
+  </a>
+  <a href="https://www.marathimatrimony.com/">
+    <div class="button shimmer">
+      <img src="img/marathim.png" alt="Image 1" height="30" width="30"> Marathi Matrimony
+    </div>
+  </a>
+  <a href="https://www.bengalimatrimony.com/">
+    <div class="button shimmer">
+      <img src="img/bengalim.png" alt="Image 1" height="30" width="30">
+      Bengali Matrimony
+    </div>
+  </a>
+  <a href="https://www.punjabimatrimony.com/">
+    <div class="button shimmer">
+      <img src="img/punjabim.png" alt="Image 1" height="30" width="30">
+      Punjabi Matrimony
+    </div>
+  </a>
+  <a href="https://www.oriyamatrimony.com/">
+    <div class="button shimmer">
+      <img src="img/oriyam.jpg" alt="Image 1" height="30" width="30">
+      Oriya Matrimony
+    </div>
+  </a>
+  <a href="https://www.assamesematrimony.com/">
+    <div class="button shimmer">
+      <img src="img/assamm.png" alt="Image 1" height="30" width="30">
+      Assamese Matrimony
+    </div>
+  </a>
+  <a href="https://www.jeevansathi.com/">
+    <div class="button shimmer">
+      <img src="img/jeevansaktim.png" alt="Image 1" height="30" width="30">
+      Jeevansathi
+    </div>
+  </a>
+  <a href="https://www.bharatmatrimony.com/">
+    <div class="button shimmer">
+      <img src="img/bharatm.png" alt="Image 1" height="30" width="30">
+      Bharat Matrimony
+    </div>
+  </a>
+  <a href="https://www.shaadi.com/">
+    <div class="button shimmer">
+      <img src="img/shadim.jpg" alt="Image 1" height="30" width="30">
+      Shaadi
+    </div>
+  </a>
+  <a href="https://www.communitymatrimony.com/">
+    <div class="button shimmer">
+      <img src="img/communitym.png" alt="Image 1" height="30" width="30">
+      Community Matrimony
+    </div>
+  </a>
+  <a href="https://www.m4marry.com/">
+    <div class="button shimmer">
+      <img src="img/m4marrym.jpg" alt="Image 1" height="30" width="30">
+      M4marry
+    </div>
+  </a>
+  <a href="https://www.mangliks.com/">
+    <div class="button shimmer">
+      <img src="img/manglinksm.png" alt="Image 1" height="30" width="30">
+      Mangliks
+    </div>
+  </a>
+  <a href="https://www.meravyaah.com/">
+    <div class="button shimmer">
+      <img src="img/meravyaahm.png" alt="Image 1" height="30" width="30">
+     Meravyaah
+    </div>
+  </a>
+
+  </div>
+</div>
+</div>
+
+
+
+
+<script>
+      function handleButtonClick(button) {
+    document.querySelectorAll('.filter-button').forEach(btn => {
+      btn.classList.remove('active');
+    });
+
+    button.classList.add('active');
+
+    const category = button.getAttribute('data-category');
+    filterVideos(category);
+  }
+
+  document.querySelectorAll('.filter-button').forEach(button => {
+    button.addEventListener('click', () => {
+      handleButtonClick(button);
+    });
+  });
+
+  function filterVideos(category) {
+    const videoItems = document.querySelectorAll('.container');
+    let noResultsMessage = document.getElementById('no-results-message');
+    let hasResults = false;
+
+    videoItems.forEach(item => {
+      const itemCategory = item.getAttribute('data-category');
+
+      if (category === 'all' || itemCategory === category) {
+        item.style.display = 'block';
+        hasResults = true;
+      } else {
+        item.style.display = 'none';
+      }
+    });
+
+    noResultsMessage.style.display = hasResults ? 'none' : 'block';
+  }
+
+  function showContainer(containerId, category) {
+    const containers = document.querySelectorAll('.container');
+    containers.forEach(container => {
+      container.style.display = 'none';
+    });
+
+    const container = document.querySelector(`.${containerId}`);
+    if (category) {
+      filterVideos(category);
+    } else {
+      container.style.display = 'block';
+    }
+  }
+
+  function showAll() {
+    const containers = document.querySelectorAll('.container');
+    containers.forEach(container => {
+      container.style.display = 'block';
+    });
+
+    filterVideos('all');
+  }
+     
+     
+     
+     
+     
+     </script> 
+    
+</body>
+</html>
